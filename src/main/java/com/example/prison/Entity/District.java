@@ -19,6 +19,7 @@ public class District {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
+    //this is an optional annotation to change the name of the column
     @Column(name = "District Name")
     String districtName;
 
