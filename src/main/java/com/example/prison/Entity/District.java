@@ -14,7 +14,7 @@ import jakarta.persistence.OneToMany;
 
 @Entity
 public class District {
-
+    //the id triggers an incrementing function
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
