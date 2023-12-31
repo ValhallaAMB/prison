@@ -39,7 +39,7 @@ public class DistrictController {
         return "District Added";
     }
 
-    @PostMapping(value = "addDistricts", consumes = "application/json")
+    @PostMapping(value = "addDistricts"/* , consumes = "application/json"*/)
     public String addDistricts(@RequestBody List<District> district) {
         districtRep.saveAll(district);
         return "Districts Added";
