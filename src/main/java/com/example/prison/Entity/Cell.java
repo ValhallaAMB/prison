@@ -1,8 +1,6 @@
 package com.example.prison.Entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -10,6 +8,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 
@@ -23,18 +22,15 @@ public class Cell {
     @Column (name = "Cell Type")
     String cellType;
 
-    @OneToOne (mappedBy = "cell", cascade = CascadeType.ALL)
-    // @JsonBackReference is used to handle the bidirectional relationship.
-    @JsonBackReference
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    @OneToOne(mappedBy = "cell", cascade = CascadeType.ALL)
+    @JsonIgnore
     Prisoner prisoner;
 
     @ManyToOne
-    @JsonManagedReference
-    //This annotation tells Jackson (the library used for JSON serialization in Spring) not to serialize the non-owning property when serializing a Cell.
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY) 
+    @JoinColumn(name = "district_id") 
     District district;
 
+    // Getters and Setters
 
     public Long getId() {
         return id;

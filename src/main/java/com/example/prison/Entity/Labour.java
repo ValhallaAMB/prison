@@ -2,7 +2,7 @@ package com.example.prison.Entity;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -26,8 +26,10 @@ public class Labour {
     int labourHours; 
 
     @ManyToMany(mappedBy = "labour", cascade = CascadeType.ALL)
-    @JsonBackReference
+    @JsonIgnore
     List<Prisoner> prisoner;
+
+    // Getters and Setters
 
     public Long getId() {
         return id;

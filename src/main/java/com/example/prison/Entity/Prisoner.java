@@ -2,14 +2,13 @@ package com.example.prison.Entity;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToOne;
 
@@ -35,15 +34,16 @@ public class Prisoner {
     @Column (name = "CrimeType")
     String crimeType;
 
-    @ManyToMany
-    @JsonManagedReference
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    @ManyToMany 
+    @JoinTable(name = "prisoner_labour",
+            joinColumns = @JoinColumn(name = "prisoner_id"),
+            inverseJoinColumns = @JoinColumn(name = "labour_id"))
     List<Labour> labour;
 
     @OneToOne
-    @JsonManagedReference
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     Cell cell;
+
+    // Getters and Setters
 
     public Long getId() {
         return id;

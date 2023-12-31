@@ -2,7 +2,7 @@ package com.example.prison.Entity;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -14,23 +14,19 @@ import jakarta.persistence.OneToMany;
 
 @Entity
 public class District {
-    //the id triggers an incrementing function
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    //this is an optional annotation to change the name of the column
     @Column(name = "District Name")
     String districtName;
 
     @Column(name = "District Location")
     String districtLocation;
 
-    // One to Many Relationship with Cell
     @OneToMany(mappedBy = "district", cascade = CascadeType.ALL)
-    // This indicate that Jackson should not serialize this property to avoid
-    // infinite recursion during the serialization process.
-    @JsonBackReference
+    @JsonIgnore
     List<Cell> cell;
 
     // Getters and Setters
